@@ -8,10 +8,8 @@ const getAllUsers = () => {
 };
 
 const createNewUser = (body) => {
-  const SQLQuery = `INSERT INTO siswa (nama, gender, kelas)
-                    VALUE ('${body.nama}', '${body.gender}', '${body.kelas}')`;
-
-  return dbPool.execute(SQLQuery);
+  const SQLQuery = `INSERT INTO siswa (nama, gender, kelas) VALUES (?, ?, ?)`;
+  return dbPool.execute(SQLQuery, [body.nama, body.gender, body.kelas]);
 };
 
 const updateUser = (body, idUser) => {
@@ -22,10 +20,9 @@ const updateUser = (body, idUser) => {
 };
 
 const deleteUser = (idUser) => {
-  const SQLQuery = `DELETE FROM siswa WHERE id=${idUser}`
-
-  return dbPool.execute(SQLQuery)
-}
+  const SQLQuery = `DELETE FROM siswa WHERE id = ?`;
+  return dbPool.execute(SQLQuery, [idUser]);
+};
 
 module.exports = {
   getAllUsers,
