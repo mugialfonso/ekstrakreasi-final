@@ -20,7 +20,7 @@ function InputDataSiswa({ onNext }) {
       const response = await axios.post("http://localhost:4000/users", data); // URL backend API
       console.log("Response:", response.data);
       alert("Data berhasil disimpan!");
-      onNext(); // Fungsi yang dipanggil setelah data berhasil disubmit
+      onNext(nama); // Fungsi yang dipanggil setelah data berhasil disubmit
     } catch (error) {
       console.error("Error:", error);
       alert("Terjadi kesalahan saat menyimpan data!");
@@ -33,7 +33,7 @@ function InputDataSiswa({ onNext }) {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
-      <div className="bg-white rounded-lg shadow-2xl p-8 md:p-20 w-full max-w-md md:max-w-[744px] h-auto md:h-[426px]">
+      <div className="bg-white rounded-lg shadow-2xl p-8 md:p-20 w-full max-w-md md:max-w-[744px] h-auto md:h-[480px]">
         <h2 className="text-2xl font-bold text-center text-[#67C6E3] mb-6">Siapakah kamu?</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
