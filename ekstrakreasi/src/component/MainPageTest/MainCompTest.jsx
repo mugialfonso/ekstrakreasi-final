@@ -6,12 +6,19 @@ import React,{useState} from "react";
 
 function MainCompTest () {
     const [stepper, setStepper] = useState(1)
+    const [namaSiswa,setNamaSiswa] = useState('')
+
     const nextStepper = () => setStepper((prev) => prev + 1)
+
+    const handleNamaSiswa = (nama) => {
+        setNamaSiswa(nama)
+        nextStepper()
+    }
     
     return (
         <div>
-            {stepper === 1 && <InputDataSiswa onNext={nextStepper}/>}
-            {stepper === 2 && <WelcomingSection onNext={nextStepper}/>}
+            {stepper === 1 && <InputDataSiswa onNext={handleNamaSiswa}/>}
+            {stepper === 2 && <WelcomingSection nama={namaSiswa} onNext={nextStepper}/>}
             {stepper === 3 && <TestSection/>}
             {/* <InputDataSiswa/> */}
             {/* <WelcomingSection/> */}
