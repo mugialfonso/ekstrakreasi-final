@@ -94,7 +94,7 @@ function InputDataSiswa({ onNext }) {
 
           {/* Tombol Submit */}
           <button type="submit" className="w-full bg-[#378CE7] text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
-            Submit
+            Kirim
           </button>
         </form>
       </div>
