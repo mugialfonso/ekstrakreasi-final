@@ -1,9 +1,8 @@
 import React from "react"
 import { useState } from "react"
 
-function TestSection () {
+function TestSection ({onFinish}) {
     const [step, setStep] = useState(1); // state untuk stepper sesi test
-    
     const [answers, setAnswers] = useState({}); // State menyimpan jawaban user
 
     // Function untuk menyimpan jawaban user
@@ -14,10 +13,20 @@ function TestSection () {
   // Function Stepper ke sesi pertanyaan selanjutnya
     const handleNext = (e) => {
     e.preventDefault();
+
+    // Validasi: Pastikan jawaban untuk step saat ini telah diisi
+    if (!answers[`step${step}`]) {
+        alert("Silakan pilih jawaban sebelum melanjutkan ke pertanyaan berikutnya!");
+        return; // Berhenti di sini jika jawaban kosong
+    }
+
+
+
     if (step < 7) {
         setStep(step + 1); // Pindah ke pertanyaan berikutnya
     } else {
-        console.log("Jawaban siswa:", answers); // Menampilkan jawaban di console
+        console.log("Jawaban siswa:", answers);
+        onFinish(answers) //send answers to maincomp
     }
 };
     

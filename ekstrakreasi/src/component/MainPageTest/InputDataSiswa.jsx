@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+
 
 function InputDataSiswa({ onNext }) {
   const [nama, setNama] = useState("");
@@ -15,20 +15,7 @@ function InputDataSiswa({ onNext }) {
       gender: gender,
       kelas: kelas,
     };
-
-    try {
-      const response = await axios.post("http://localhost:4000/users", data); // URL backend API
-      console.log("Response:", response.data);
-      alert("Data berhasil disimpan!");
-      onNext(nama); // Fungsi yang dipanggil setelah data berhasil disubmit
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Terjadi kesalahan saat menyimpan data!");
-    }
-
-    // console.log("Nama:", nama);
-    // console.log("Gender:", gender);
-    // console.log("Kelas:", kelas);
+    onNext(data)
   };
 
   return (
