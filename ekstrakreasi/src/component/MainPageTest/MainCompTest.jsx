@@ -60,7 +60,7 @@ function MainCompTest() {
       console.log("Respons dari API:", response.data);
 
       if (response.data && response.data.data && response.data.data.length > 0) {
-        const recommendation = response.data.data[0].nama_kegiatan; // Ambil nama_kegiatan
+        const recommendation = response.data.data.map((item) => item.nama_kegiatan) // Ambil nama_kegiatan
         setRecommendation(recommendation); // Simpan rekomendasi di state
       } else {
         setRecommendation("Tidak ada rekomendasi yang tersedia."); // Atur default pesan rekomendasi
