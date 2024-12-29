@@ -5,6 +5,7 @@ import HasilRekomendasi from "./HasilRekomendasi";
 
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function MainCompTest() {
   const [stepper, setStepper] = useState(1); // Mengelola tahapan (step) sesi
@@ -17,7 +18,12 @@ function MainCompTest() {
   // Menyimpan data profil siswa ke backend
   const handleSaveProfile = async (data) => {
     if (!data.nama || !data.gender || !data.kelas) {
-      alert("Semua field wajib diisi!");
+      Swal.fire({
+        title: 'Form Kosong!',
+        text: 'Semua bagian wajib diisi!',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+      });
       return;
     }
     try {
@@ -27,9 +33,23 @@ function MainCompTest() {
       const result = response.data;
       setStudentName(data.nama); // Simpan nama siswa
       setStepper(2); // Pindah ke WelcomingSection
+
+      Swal.fire({
+        title: 'Form berhasil dikirim',
+        text: 'Profil Kamu berhasil disimpan.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+
     } catch (error) {
       console.error("Error Request to API:", error);
-      alert("Terjadi kesalahan saat menyimpan data siswa!");
+      
+      Swal.fire({
+        title: 'Gagal!',
+        text: 'Terjadi kesalahan saat menyimpan data siswa!',
+        icon: 'error',
+        confirmButtonText: 'Coba Lagi',
+      });
     }
   };
 
@@ -54,8 +74,25 @@ function MainCompTest() {
   
   //Function untuk mengulangi test
   const restartTest = () => {
-    setTestResults({}); // Reset hasil tes
-    setStepper(3); // Kembali ke TestSection
+    Swal.fire({
+    title: 'Ulangi Tes?',
+    text: 'Apakah Anda yakin ingin mengulangi test? Semua hasil test akan dihapus.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, ulangi!',
+    cancelButtonText: 'Batal',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Reset hasil tes dan kembali ke TestSection
+      setTestResults({});
+      setStepper(3);
+
+      // Tampilkan alert sukses setelah reset
+      Swal.fire('Berhasil!', 'Silahkan mengulangi test.', 'success');
+    }
+  });
   };
 
   return (
