@@ -7,6 +7,7 @@ import Navbar from './component/Navbar'
 import Footer from './component/Footer'
 import TestPage from './Pages/TestPage'
 import AdminPage from './Pages/AdminPage'
+import LoginPage from './Pages/LoginPage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/test' element={<TestPage/>} />
           <Route path='/aboutus' element={<AboutUsPage/>} />
           <Route path='/admin' element={<AdminPage/>} />
+          <Route path='/login' element={<LoginPage/>} />
         </Routes>
       <Footer/>
     </Router>

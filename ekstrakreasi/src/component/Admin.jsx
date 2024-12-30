@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
 
   // GET data
   useEffect(() => {
@@ -48,9 +50,21 @@ function Admin() {
     }
   };
 
+    // Handle logout
+    const handleLogout = () => {
+      localStorage.removeItem("adminToken"); // Hapus token dari localStorage
+      navigate("/login"); // Redirect ke halaman login
+    };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl font-bold mb-5">Daftar Siswa</h1>
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 text-white py-2 px-4 rounded mb-4 hover:bg-red-600"
+      >
+        Logout
+      </button>
       <div className="w-full max-w-4xl overflow-auto max-h-[500px]">
         <table className="table-auto w-full bg-white shadow-md rounded">
           <thead>

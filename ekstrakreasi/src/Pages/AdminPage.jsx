@@ -1,12 +1,13 @@
-import Admin from "../component/admin"
+import React from "react";
+import Admin from "../component/Admin";
+import ProtectedRoute from "../component/ProtectedRoute";
 
-function AdminPage () {
-
-    return (
-        <div>
-            <Admin/>
-        </div>
-    )
+function AdminPage() {
+  return (
+    <ProtectedRoute>
+      <Admin />
+    </ProtectedRoute>
+  );
 }
 
-export default AdminPage
+export default AdminPage;
