@@ -2,10 +2,9 @@ const mysql = require("mysql2");
 
 //connect to DB
 const dbPool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  // password: "",
-  database: "ekstrakreasi",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  database: process.env.DB_NAME,
 });
 
 module.exports = dbPool.promise()
