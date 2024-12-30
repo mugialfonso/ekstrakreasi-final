@@ -3,10 +3,11 @@ const express = require("express");
 const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 4000
-// const PORT = 4000;
 const userRoutes = require("./routes/usersRoute");
 const middleWareLogRequest = require("./middleware/log");
 const recommendationsRoute = require("./routes/recomenndationRoute");
+const authRoutes = require("./routes/authRoute");
+const authenticateAdmin = require("./middleware/auth");
 
 // Middleware untuk parsing JSON
 app.use(express.json());
@@ -22,6 +23,14 @@ app.use("/users", userRoutes);
 
 // recommendation routes
 app.use("/recommendations", recommendationsRoute);
+
+// Rute untuk login admin
+app.use("/auth", authRoutes);
+
+// Rute khusus admin (dilindungi)
+app.use("/admin", authenticateAdmin, (req, res) => {
+    res.json({ message: "Selamat datang di halaman admin!", admin: req.admin });
+});
 
 // run server
 app.listen(PORT, () => {
