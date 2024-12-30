@@ -6,15 +6,15 @@ const authenticateAdmin = (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) {
-        return res.status(401).json({ message: "Akses ditolak. Token tidak ditemukan." });
+        return res.status(401).json({ message: "Access denied. Token not found." });
     }
 
     jwt.verify(token, SECRET_KEY, (err, admin) => {
         if (err) {
-            return res.status(403).json({ message: "Token tidak valid." });
+            return res.status(403).json({ message: "Token invalid." });
         }
 
-        req.admin = admin; // Simpan data admin yang di-decode dari token
+        req.admin = admin; 
         next();
     });
 };

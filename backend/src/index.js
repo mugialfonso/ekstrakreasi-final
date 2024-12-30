@@ -5,7 +5,8 @@ const app = express();
 const PORT = process.env.PORT || 4000
 const userRoutes = require("./routes/usersRoute");
 const middleWareLogRequest = require("./middleware/log");
-const recommendationsRoute = require("./routes/recomenndationRoute");
+const recommendationsRoute = require("./routes/recommendationRoute");
+
 const authRoutes = require("./routes/authRoute");
 const authenticateAdmin = require("./middleware/auth");
 
@@ -29,7 +30,7 @@ app.use("/auth", authRoutes);
 
 // Rute khusus admin (dilindungi)
 app.use("/admin", authenticateAdmin, (req, res) => {
-    res.json({ message: "Selamat datang di halaman admin!", admin: req.admin });
+    res.json({ message: "Welcome to admin", admin: req.admin });
 });
 
 // run server

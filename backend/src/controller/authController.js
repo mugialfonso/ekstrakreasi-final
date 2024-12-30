@@ -12,20 +12,20 @@ const authController = {
             // Cari admin berdasarkan username
             const admin = await Admin.findByUsername(username);
             if (!admin) {
-                return res.status(404).json({ message: "Admin tidak ditemukan" });
+                return res.status(404).json({ message: "username not found" });
             }
 
             // Verifikasi password menggunakan bcrypt
             const isMatch = await bcrypt.compare(password, admin.password);
             if (!isMatch) {
-                return res.status(401).json({ message: "Password salah" });
+                return res.status(401).json({ message: "Wrong Password" });
             }
 
             // Jika password cocok, buat token JWT
             const token = jwt.sign({ id: admin.id, username: admin.username }, SECRET_KEY, { expiresIn: "2h" });
             res.json({ token });
         } catch (error) {
-            res.status(500).json({ message: "Terjadi kesalahan server", error });
+            res.status(500).json({ message: "server error", error });
         }
     },
 };

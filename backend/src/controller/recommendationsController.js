@@ -2,11 +2,12 @@ const rulesModel = require("../models/rulesModel");
 
 const getRecommendations = async (req, res) => {
   const { step1, step2, step3, step4, step5, step6, step7 } = req.body;
+  console.log("Request body:", req.body);
 
   // Validasi input dari form frontend
   if (!step1 || !step2 || !step3 || !step4 || !step5 || !step6 || !step7) {
     return res.status(400).json({
-      message: "Semua jawaban harus diisi.",
+      message: "All answer is require.",
     });
   }
 
@@ -22,7 +23,8 @@ const getRecommendations = async (req, res) => {
       step5,
       step6,
       step7,
-    });
+    }); 
+    console.log("Full Match recommendations:", recommendations);
 
     //eliminasi tahap-1
     if (recommendations.length === 0) {
@@ -35,6 +37,7 @@ const getRecommendations = async (req, res) => {
         step7,
   
       })
+      console.log("Phase 1 recommendations:", recommendations);
     }
 
     //eliminasi tahap-2
@@ -47,6 +50,7 @@ const getRecommendations = async (req, res) => {
         step7,
   
       })
+      console.log("Phase 2 recommendations:", recommendations);
     }
 
     //eliminasi tahap-3
@@ -57,6 +61,7 @@ const getRecommendations = async (req, res) => {
         step3, 
         step4,
       })
+      console.log("Phase 3 recommendations:", recommendations);
     }
 
     //eliminasi tahap-4
@@ -66,6 +71,7 @@ const getRecommendations = async (req, res) => {
         step2, 
         step3, 
       })
+      console.log("Phase 4 recommendations:", recommendations);
     }
 
     //default
@@ -73,22 +79,15 @@ const getRecommendations = async (req, res) => {
       recommendations = await rulesModel.generateRecommendationsDefault({
         step1, 
       })
+      console.log("Default recommendations:", recommendations);
     }
 
-    // validasi ketika tidak ada yang cocok sama sekali
-    // if (recommendations.length === 0) {
-    //   // Jika tidak ada rekomendasi
-    //   return res.status(404).json({
-    //     message: "Tidak ada rekomendasi yang sesuai dengan input Anda.",
-    //   });
-    // }
-
-
     res.status(200).json({
-      message: "Recommendations fetched successfully",
+      message: "Recommendations successfully",
       data: recommendations,
     });
   } catch (error) {
+    console.error("Error processing recommendations:", error);
     res.status(500).json({
       message: "Error processing recommendations",
       error,
