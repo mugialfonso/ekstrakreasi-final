@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "/src/assets/image/Eskul.png"
 
 
 function Hero () {
@@ -24,7 +25,7 @@ function Hero () {
                         <p className="text-[#757575] font-medium">Temukan dan kembangkan minat serta bakatmu dengan rekomendasi kegiatan ekstrakurikuler yang tepat di SMKN 9 Kabupaten Tangerang. Mulailah perjalananmu menuju prestasi dan kreativitas tanpa batas bersama EkstraKreasi.</p>
                         <button className="bg-[#378CE7] w-[284px] h-[48px]  rounded-md text-white font-medium my-6 py-3 mx-auto md:mx-0 hover:bg-blue-700 transition duration-300 " onClick={() => navigateTo("/test")} >Mulai Test</button>
                 </div>
-                <img className="w-[500px] mx-auto my-4 order-1 md:order-2" src= "/src/assets/image/Eskul.png" alt="Gambar-Eskul" />
+                <img className="w-[500px] mx-auto my-4 order-1 md:order-2" src= {logo} alt="Gambar-Eskul" />
             </div>
 
             {/* Layout img-kiri dan text-kanan

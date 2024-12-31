@@ -9,7 +9,7 @@ function Admin() {
   // GET data
   useEffect(() => {
     axios
-      .get("http://localhost:4000/users")
+      .get("https://apibe.ekstrakreasi.my.id/users")
       .then((response) => {
         setStudents(response.data.data);
       })
@@ -21,7 +21,7 @@ function Admin() {
   // Handle delete
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:4000/users/${id}`)
+      .delete(`https://apibe.ekstrakreasi.my.id/users/${id}`)
       .then((response) => {
         setStudents(students.filter((student) => student.id !== id));
         alert("User deleted successfully!");
@@ -37,7 +37,7 @@ function Admin() {
     const updatedName = prompt("Enter the new name for the user:");
     if (updatedName) {
       axios
-        .patch(`http://localhost:4000/users/${id}`, { nama: updatedName })
+        .patch(`https://apibe.ekstrakreasi.my.id/users/${id}`, { nama: updatedName })
         .then((response) => {
           const updatedStudents = students.map((student) => (student.id === id ? { ...student, nama: updatedName } : student));
           setStudents(updatedStudents);

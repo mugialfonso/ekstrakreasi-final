@@ -27,7 +27,7 @@ function MainCompTest() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:4000/users", data); // Axios POST request
+      const response = await axios.post("https://apibe.ekstrakreasi.my.id/users", data); // Axios POST request
       console.log("Respons dari API:", response.data);
 
       const result = response.data;
@@ -56,7 +56,7 @@ function MainCompTest() {
   const handleTestResults = async (results) => {
     setTestResults(results); //simpen data di state testResults
     try {
-      const response = await axios.post("http://localhost:4000/recommendations", results);
+      const response = await axios.post("https://apibe.ekstrakreasi.my.id/recommendations", results);
       console.log("Respons dari API:", response.data);
 
       if (response.data && response.data.data && response.data.data.length > 0) {
